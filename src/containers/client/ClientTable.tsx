@@ -88,6 +88,20 @@ const ClientsTable: React.FC = () => {
         setSelectedClient(rowData);
     };
 
+    const actionBodyTemplateProd = (rowData: Product) => {
+        return (
+            <div>
+                <Button icon='pi pi-eye' className="p-button-text" onClick={() => handleWatchModalProd(rowData)} />
+            </div>
+        );
+    };
+
+    const handleWatchModalProd = (rowData: Product) => {
+        console.log('Ver detalle del producto:', rowData);
+        setShowProductsDetailModal(true);
+        setSelectedProduct(rowData);
+    };    
+
     const handleDeleteData = async () => {
         try {
             const response = await deleteAllClients();
@@ -155,11 +169,11 @@ const ClientsTable: React.FC = () => {
                         <Column field="descripcion" header="Descripcion del Producto" style={{ padding: '0.75rem 0rem' }} />
                         <Column field="price" header="Precio del producto" style={{ padding: '0.75rem 0rem' }} />
                         <Column field="category_id" header="Codigo categoria" style={{ padding: '0.75rem 0rem' }} />
-                        <Column body={actionBodyTemplate} style={{ textAlign: 'center', padding: '0.75rem 0rem' }} />
+                        <Column body={actionBodyTemplateProd} style={{ textAlign: 'center', padding: '0.75rem 0rem' }} />
                     </DataTable>
                 </div>
             ) : (
-                <p>No hay Usuarios que mostrar</p>
+                <p>No hay Productos que mostrar</p>
             )}
             <ProductDialogDetail visible={showProductsDetailModal} setVisible={setShowProductsDetailModal} product={selectedProduct} />            
         </div>
